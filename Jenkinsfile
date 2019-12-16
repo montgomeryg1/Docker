@@ -4,12 +4,12 @@ pipeline {
     stages {
         stage('Example Build') {
             steps {
-                echo 'Hello, Maven'
+                echo 'Hello, building...'
             }
         }
         stage('Example Test') {
             steps {
-                echo 'Hello, JDK'
+                echo 'Hello, testing...'
             }
         }
     }
