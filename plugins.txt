@@ -1,0 +1,5 @@
+workflow-aggregator:latest
+blueocean:latest
+configuration-as-code:latest
+job-dsl:latest
+kubernetes:1.22.0
