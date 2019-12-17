@@ -17,7 +17,8 @@ pipeline {
     stage('Build Docker Image') {
       steps {
         container('docker') {  
-          sh "docker build -t jcasc ."  // when we run docker in this step, we're running it via a shell on the docker build-pod container
+          sh "docker build -t dockusgeorgus/jcasc:v1.0.1 ." 
+          sh "docker push dockusgeorgus/jcasc:v1.0.1"
         }
       }
     }
