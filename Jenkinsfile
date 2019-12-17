@@ -11,6 +11,8 @@ pipeline {
   stages {
     stage('Build') {
       steps {  // no container directive is needed as the maven container is the default
+        sh "mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false"
+        sh "cd my-app"
         sh "mvn clean install"   
       }
     }
