@@ -1,0 +1,23 @@
+jenkins:
+  systemMessage: "Demo: configured automatically with JCasC plugin\n\n"
+tool:
+  git:
+    installations:
+    - home: "git"
+      name: "Default"
+jobs:
+  - script: >
+      pipelineJob('pipeline') {
+          definition {
+              cpsScm {
+                  scriptPath 'Jenkinsfile'
+                  scm {
+                    git {
+                        remote { url 'https://github.com/montgomeryg1/k8s_project.git' }
+                        branch '*/master'
+                        extensions {}
+                    }
+                  }
+              }
+          }
+      }
