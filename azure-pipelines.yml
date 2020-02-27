@@ -18,11 +18,17 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
+- task: Docker@2
+  inputs:
+    containerRegistry: 'DockerHub'
+    command: 'build'
+    Dockerfile: '**/Dockerfile'
+
 - script: |
     export VERSION=$(curl --silent "https://api.github.com/repos/aquasecurity/trivy/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
     wget https://github.com/aquasecurity/trivy/releases/download/v${VERSION}/trivy_${VERSION}_Linux-64bit.tar.gz
     tar zxvf trivy_${VERSION}_Linux-64bit.tar.gz
-    trivy --exit-code 0 --severity HIGH --no-progress ${imageName}:${tag}
-    trivy --exit-code 1 --severity CRITICAL --no-progress ${imageName}:${tag}
+    trivy --exit-code 0 --severity HIGH --no-progress 
+    trivy --exit-code 1 --severity CRITICAL --no-progress
 
         
