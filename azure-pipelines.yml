@@ -34,5 +34,5 @@ steps:
       tar zxvf trivy_${VERSION}_Linux-64bit.tar.gz
       echo "$(imageName)":"$(tag)"
       ./trivy --exit-code 0 --severity HIGH --no-progress "$(imageName)":"$(tag)"
-      ./trivy --exit-code 1 --severity CRITICAL --no-progress "$(imageName)":"$(tag)"
+      ./trivy --exit-code 0 --severity CRITICAL --no-progress -f json -o results.json "$(imageName)":"$(tag)"
     displayName: "Scan image with trivy"
