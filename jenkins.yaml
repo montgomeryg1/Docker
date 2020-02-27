@@ -13,7 +13,7 @@ jobs:
                   scriptPath 'Jenkinsfile'
                   scm {
                     git {
-                        remote { url 'https://github.com/montgomeryg1/k8s_project.git' }
+                        remote { url 'https://github.com/montgomeryg1/Docker.git' }
                         branch '*/master'
                         extensions {}
                     }
