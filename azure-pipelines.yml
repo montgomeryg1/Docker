@@ -45,7 +45,8 @@ steps:
       python -m pip install -U pip
       python -m pip install dockerscan
       dockerscan image info jcasc-image
-    displayName: "Install dockerscan"
+      dockerscan image analyze jcasc-image
+    displayName: "Install and run dockerscan"
 
   - task: Docker@2
     inputs:
