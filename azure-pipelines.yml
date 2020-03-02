@@ -19,28 +19,20 @@ variables:
 name: "$(BuildID)"
 
 steps:
-  - task: Docker@2
-    inputs:
-      containerRegistry: "DockerHub"
-      repository: "$(imageName)"
-      command: "build"
-      Dockerfile: "**/jenkins/Dockerfile"
-      tags: '$(tag)'
-    displayName: "Docker build and push jcasc"
-
   - task: DockerInstaller@0
     inputs:
       dockerVersion: '17.09.0-ce'
 
-  - script: docker save "$(imageName)":"$(tag)" -o "$(imageName)":"$(tag)"-image
+  - script: |
+      docker build -t jcasc jenkins/
+      docker save jcasc -o jcasc-image
 
   - script: |
       export VERSION=$(curl --silent "https://api.github.com/repos/aquasecurity/trivy/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
       wget https://github.com/aquasecurity/trivy/releases/download/v${VERSION}/trivy_${VERSION}_Linux-64bit.tar.gz
       tar zxvf trivy_${VERSION}_Linux-64bit.tar.gz
-      echo "$(imageName)":"$(tag)"
-      ./trivy --exit-code 0 --severity HIGH --no-progress "$(imageName)":"$(tag)"
-      ./trivy --exit-code 0 --severity CRITICAL --no-progress "$(imageName)":"$(tag)"
+      ./trivy --exit-code 0 --severity HIGH --no-progress jcasc
+      ./trivy --exit-code 0 --severity CRITICAL --no-progress jcasc
     displayName: "Scan image with trivy"
     
   - task: UsePythonVersion@0
@@ -52,9 +44,17 @@ steps:
   - script: |
       python -m pip install -U pip
       python -m pip install dockerscan
-      dockerscan image info "$(imageName)":"$(tag)"-image
+      dockerscan image info jcasc-image
     displayName: "Install dockerscan"
 
+  - task: Docker@2
+    inputs:
+      containerRegistry: "DockerHub"
+      repository: "$(imageName)"
+      command: "buildAndPush"
+      Dockerfile: "**/jenkins/Dockerfile"
+      tags: '$(tag)'
+    displayName: "Docker build and push jcasc"
 
 
 
