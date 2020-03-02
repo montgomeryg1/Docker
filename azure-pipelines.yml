@@ -35,9 +35,10 @@ steps:
       architecture: 'x64'
 
   - script: |
-      python3.5 -m pip install -U pip
-      python3.5 -m pip install dockerscan
+      python -m pip install -U pip
+      python -m pip install dockerscan
       dockerscan -h
+      dockerscan image analyze "$(imageName)"
     displayName: "Install dockerscan"
 
   - script: |
