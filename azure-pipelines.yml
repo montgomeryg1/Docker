@@ -28,6 +28,18 @@ steps:
       tags: '$(tag)'
     displayName: "Docker build and push"
 
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.x'
+      addToPath: true
+      architecture: 'x64'
+
+  - script: |
+      python3.5 -m pip install -U pip
+      python3.5 -m pip install dockerscan
+      dockerscan -h
+    displayName: "Install dockerscan"
+
   - script: |
       export VERSION=$(curl --silent "https://api.github.com/repos/aquasecurity/trivy/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
       wget https://github.com/aquasecurity/trivy/releases/download/v${VERSION}/trivy_${VERSION}_Linux-64bit.tar.gz
@@ -36,3 +48,5 @@ steps:
       ./trivy --exit-code 0 --severity HIGH --no-progress "$(imageName)":"$(tag)"
       ./trivy --exit-code 0 --severity CRITICAL --no-progress "$(imageName)":"$(tag)"
     displayName: "Scan image with trivy"
+
+
