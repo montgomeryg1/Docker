@@ -7,7 +7,13 @@
     },
     "asp_name": {
       "type": "String"
-    }
+    },
+    "sku_name": {
+      "type": "String"
+    },
+    "sku_tier": {
+      "type": "String"
+    }    
   },
   "variables": {},
   "resources": [
@@ -17,10 +23,8 @@
       "name": "[parameters('asp_name')]",
       "location": "North Europe",
       "sku": {
-        "name": "F1",
-        "tier": "Free",
-        "size": "F1",
-        "family": "F",
+        "name": "[parameters('sku_name')]",
+        "tier": "[parameters('sku_tier')]",
         "capacity": 1
       },
       "kind": "linux",
