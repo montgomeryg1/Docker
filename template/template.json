@@ -149,25 +149,6 @@
         }
       },
       {
-        "type": "Microsoft.Web/sites/deployments",
-        "apiVersion": "2018-11-01",
-        "name": "[concat(parameters('webapp_name'), '/024473b7bad84452b0c4281eec443d18')]",
-        "location": "[resourceGroup().location]",
-        "dependsOn": [
-          "[resourceId('Microsoft.Web/sites', parameters('webapp_name'))]"
-        ],
-        "properties": {
-          "status": 4,
-          "author_email": "N/A",
-          "author": "N/A",
-          "deployer": "VSTS",
-          "message": "{\"type\":\"deployment\",\"commitId\":\"fb0cb0b204351966d1f24ba9d142887ced610e26\",\"buildId\":\"205\",\"releaseId\":\"25\",\"buildNumber\":\"205\",\"releaseName\":\"Release-12\",\"repoProvider\":\"GitHub\",\"repoName\":\"montgomeryg1/Docker\",\"collectionUrl\":\"https://montgomeryg1.visualstudio.com/\",\"teamProject\":\"d4e9f863-e230-483d-ba2c-ee9916790915\",\"buildProjectUrl\":\"https://montgomeryg1.visualstudio.com/d4e9f863-e230-483d-ba2c-ee9916790915\",\"repositoryUrl\":\"\",\"branch\":\"master\",\"teamProjectName\":\"Docker\",\"slotName\":\"production\"}",
-          "start_time": "2020-04-25T22:59:36.6350578Z",
-          "end_time": "2020-04-25T22:59:37.0870799Z",
-          "active": true
-        }
-      },
-      {
         "type": "Microsoft.Web/sites/hostNameBindings",
         "apiVersion": "2018-11-01",
         "name": "[concat(parameters('webapp_name'), '/', parameters('webapp_name'), '.azurewebsites.net')]",
