@@ -21,7 +21,7 @@
         "type": "Microsoft.Web/serverfarms",
         "apiVersion": "2018-02-01",
         "name": "[parameters('asp_name')]",
-        "location": "North Europe",
+        "location": "[resourceGroup().location]",
         "sku": {
             "name": "[parameters('sku_name')]",
             "tier": "[parameters('sku_tier')]"
@@ -42,7 +42,7 @@
         "type": "Microsoft.Web/sites",
         "apiVersion": "2018-11-01",
         "name": "[parameters('webapp_name')]",
-        "location": "North Europe",
+        "location": "[resourceGroup().location]",
         "dependsOn": [
           "[resourceId('Microsoft.Web/serverfarms', parameters('asp_name'))]"
         ],
@@ -79,7 +79,7 @@
         "type": "Microsoft.Web/sites/config",
         "apiVersion": "2018-11-01",
         "name": "[concat(parameters('webapp_name'), '/web')]",
-        "location": "North Europe",
+        "location": "[resourceGroup().location]",
         "dependsOn": [
           "[resourceId('Microsoft.Web/sites', parameters('webapp_name'))]"
         ],
@@ -105,7 +105,6 @@
           "httpLoggingEnabled": false,
           "logsDirectorySizeLimit": 35,
           "detailedErrorLoggingEnabled": false,
-          "publishingUsername": "$react-app-xfr",
           "scmType": "VSTSRM",
           "use32BitWorkerProcess": true,
           "webSocketsEnabled": false,
@@ -153,7 +152,7 @@
         "type": "Microsoft.Web/sites/deployments",
         "apiVersion": "2018-11-01",
         "name": "[concat(parameters('webapp_name'), '/024473b7bad84452b0c4281eec443d18')]",
-        "location": "North Europe",
+        "location": "[resourceGroup().location]",
         "dependsOn": [
           "[resourceId('Microsoft.Web/sites', parameters('webapp_name'))]"
         ],
@@ -172,7 +171,7 @@
         "type": "Microsoft.Web/sites/hostNameBindings",
         "apiVersion": "2018-11-01",
         "name": "[concat(parameters('webapp_name'), '/', parameters('webapp_name'), '.azurewebsites.net')]",
-        "location": "North Europe",
+        "location": "[resourceGroup().location]",
         "dependsOn": [
           "[resourceId('Microsoft.Web/sites', parameters('webapp_name'))]"
         ],
