@@ -176,7 +176,7 @@
           "[resourceId('Microsoft.Web/sites', parameters('webapp_name'))]"
         ],
         "properties": {
-          "siteName": "react-app-xfr",
+          "siteName": "[parameters('webapp_name')]",
           "hostNameType": "Verified"
         }
       }
